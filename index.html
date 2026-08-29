@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ===================================================== -->
+    <!-- META TAGS & TITLE -->
+    <!-- ===================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Modern digital solutions, web development, automation and AI-powered experiences by Nexora Digital.">
 
-    <title>Nexora Digital | Digital Solutions</title>
+    <title>Nexora Digital | Web Development & AI Solutions</title>
 
-    <!-- Google Font -->
+    <!-- ===================================================== -->
+    <!-- FAVICON -->
+    <!-- ===================================================== -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+    <!-- ===================================================== -->
+    <!-- GOOGLE FONTS -->
+    <!-- ===================================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Correct CSS Path -->
+    <!-- ===================================================== -->
+    <!-- STYLESHEET LINK -->
+    <!-- ===================================================== -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- ===================================================== -->
+    <!-- BACKGROUND PARTICLES CANVAS -->
+    <!-- ===================================================== -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- ===================================================== -->
+    <!-- HEADER & NAVIGATION -->
+    <!-- ===================================================== -->
     <header class="header">
         <nav class="navbar container">
             <a href="index.html" class="logo">
@@ -43,14 +62,19 @@
         </nav>
     </header>
 
-
-    <!-- ================= HERO ================= -->
     <main>
+        <!-- ===================================================== -->
+        <!-- HERO SECTION -->
+        <!-- ===================================================== -->
         <section class="hero" id="home">
             <div class="hero-background"></div>
 
             <div class="container hero-content">
                 <div class="hero-text">
+                    <div class="live-status-badge">
+                        <span class="pulsing-dot"></span> Available for New Projects
+                    </div>
+
                     <span class="eyebrow">
                         DIGITAL SOLUTIONS • WEB • AI • AUTOMATION
                     </span>
@@ -76,11 +100,6 @@
                         </a>
                     </div>
 
-                    <div class="live-status-badge">
-              <span class="pulsing-dot"></span> Available for New Projects
-                    </div>
-                    
-
                     <div class="hero-stats">
                         <div class="stat">
                             <strong>10+</strong>
@@ -97,7 +116,7 @@
                     </div>
                 </div>
 
-                <!-- HERO VISUAL -->
+                <!-- HERO VISUAL (CODE CARD) -->
                 <div class="hero-visual">
                     <div class="glow glow-one"></div>
                     <div class="glow glow-two"></div>
@@ -127,8 +146,9 @@ build(solution);</code></pre>
             </div>
         </section>
 
-
-        <!-- ================= SERVICES ================= -->
+        <!-- ===================================================== -->
+        <!-- SERVICES SECTION -->
+        <!-- ===================================================== -->
         <section class="section services" id="services">
             <div class="container">
                 <div class="section-heading">
@@ -169,8 +189,9 @@ build(solution);</code></pre>
             </div>
         </section>
 
-
-        <!-- ================= PROJECTS ================= -->
+        <!-- ===================================================== -->
+        <!-- PROJECTS SECTION -->
+        <!-- ===================================================== -->
         <section class="section projects" id="projects">
             <div class="container">
                 <div class="section-heading">
@@ -219,8 +240,9 @@ build(solution);</code></pre>
             </div>
         </section>
 
-
-        <!-- ================= ABOUT ================= -->
+        <!-- ===================================================== -->
+        <!-- ABOUT SECTION -->
+        <!-- ===================================================== -->
         <section class="section about" id="about">
             <div class="container about-grid">
                 <div class="about-content">
@@ -241,8 +263,9 @@ build(solution);</code></pre>
             </div>
         </section>
 
-
-        <!-- ================= CONTACT ================= -->
+        <!-- ===================================================== -->
+        <!-- CONTACT SECTION -->
+        <!-- ===================================================== -->
         <section class="section contact" id="contact">
             <div class="container contact-box">
                 <div>
@@ -250,13 +273,14 @@ build(solution);</code></pre>
                     <h2>Let's build something valuable together.</h2>
                     <p>Tell us about your idea and let's turn it into a working digital solution.</p>
                 </div>
-                <a href="mailto:hello@example.com" class="btn btn-primary">Get In Touch →</a>
+                <a href="mailto:sanaullamastoi548@gmail.com" class="btn btn-primary">Get In Touch →</a>
             </div>
         </section>
     </main>
 
-
-    <!-- ================= FOOTER ================= -->
+    <!-- ===================================================== -->
+    <!-- FOOTER SECTION -->
+    <!-- ===================================================== -->
     <footer class="footer">
         <div class="container footer-content">
             <div>
@@ -269,7 +293,9 @@ build(solution);</code></pre>
         </div>
     </footer>
 
-    <!-- Correct JS Path -->
+    <!-- ===================================================== -->
+    <!-- JAVASCRIPT FILE -->
+    <!-- ===================================================== -->
     <script src="script.js"></script>
 
 </body>
