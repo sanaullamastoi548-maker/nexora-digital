@@ -127,3 +127,22 @@ if (footerYear) {
         `© ${currentYear} Nova Studio. All rights reserved.`;
 
 }
+
+// Dynamic Typing Effect for Hero Code Card
+const codeElement = document.querySelector('.code-content code');
+if (codeElement) {
+    const originalText = codeElement.innerText;
+    codeElement.innerText = '';
+    let i = 0;
+    
+    function typeCode() {
+        if (i < originalText.length) {
+            codeElement.innerText += originalText.charAt(i);
+            i++;
+            setTimeout(typeCode, 30);
+        }
+    }
+    setTimeout(typeCode, 500);
+}
+
+
