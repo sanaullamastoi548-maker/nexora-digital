@@ -1,148 +1,156 @@
-/* =====================================================
-   NOVA STUDIO
-   Main JavaScript
-===================================================== */
+/**
+ * NOVA STUDIO - Interactive & Professional Main Script
+ * Handles navigation, smooth scrolling, interactive cards, and UI animations.
+ */
 
+document.addEventListener('DOMContentLoaded', () => {
 
-/* ================= MOBILE MENU ================= */
+    /* =====================================================
+       1. MOBILE MENU TOGGLE
+    ===================================================== */
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            const isExpanded = navLinks.classList.contains('show');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+        });
 
-
-menuToggle.addEventListener("click", () => {
-
-    navLinks.classList.toggle("show");
-
-});
-
-
-/* ================= CLOSE MENU ================= */
-
-const navigationLinks =
-    document.querySelectorAll(".nav-links a");
-
-
-navigationLinks.forEach((link) => {
-
-    link.addEventListener("click", () => {
-
-        navLinks.classList.remove("show");
-
-    });
-
-});
-
-
-/* ================= ACTIVE NAVIGATION ================= */
-
-const sections =
-    document.querySelectorAll("section[id]");
-
-
-window.addEventListener("scroll", () => {
-
-    const scrollPosition =
-        window.scrollY + 150;
-
-
-    sections.forEach((section) => {
-
-        const sectionTop =
-            section.offsetTop;
-
-        const sectionHeight =
-            section.offsetHeight;
-
-        const sectionId =
-            section.getAttribute("id");
-
-
-        if (
-            scrollPosition >= sectionTop &&
-            scrollPosition < sectionTop + sectionHeight
-        ) {
-
-            navigationLinks.forEach((link) => {
-
-                link.classList.remove("active");
-
+        // Close menu when clicking any navigation link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('show');
             });
+        });
+    }
 
+    /* =====================================================
+       2. HEADER SCROLL EFFECT & ACTIVE LINK HIGHLIGHTER
+    ===================================================== */
+    const header = document.querySelector('.header');
+    const sections = document.querySelectorAll('section[id]');
 
-            const activeLink =
-                document.querySelector(
-                    `.nav-links a[href="#${sectionId}"]`
-                );
+    const handleScroll = () => {
+        const scrollY = window.scrollY;
 
-
-            if (activeLink) {
-
-                activeLink.classList.add("active");
-
+        // Add shadow/backdrop update to header on scroll
+        if (header) {
+            if (scrollY > 50) {
+                header.style.background = 'rgba(5, 11, 20, 0.95)';
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+            } else {
+                header.style.background = 'rgba(5, 11, 20, 0.8)';
+                header.style.boxShadow = 'none';
             }
-
         }
 
+        // Active link highlighting based on current section
+        sections.forEach(current => {
+            const sectionHeight = current.offsetHeight;
+            const sectionTop = current.offsetTop - 100;
+            const sectionId = current.getAttribute('id');
+            const navItem = document.querySelector(`.nav-links a[href*="${sectionId}"]`);
+
+            if (navItem) {
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    navItem.classList.add('active');
+                } else {
+                    navItem.classList.remove('active');
+                }
+            }
+        });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    /* =====================================================
+       3. SMOOTH SCROLLING FOR INTERNAL LINKS
+    ===================================================== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
 
-});
+    /* =====================================================
+       4. HERO CODE CARD TYPEWRITER EFFECT
+    ===================================================== */
+    const codeContainer = document.querySelector('.code-content pre code');
+    if (codeContainer) {
+        const originalText = codeContainer.innerText;
+        codeContainer.innerText = '';
+        let index = 0;
 
+        const typeWriter = () => {
+            if (index < originalText.length) {
+                codeContainer.innerText += originalText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 15); // Adjust typing speed here
+            }
+        };
 
-/* ================= HEADER SCROLL EFFECT ================= */
-
-const header =
-    document.querySelector(".header");
-
-
-window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 30) {
-
-        header.style.background =
-            "rgba(8, 11, 18, 0.92)";
-
-    } else {
-
-        header.style.background =
-            "rgba(8, 11, 18, 0.75)";
-
+        // Start typing effect slightly after page load
+        setTimeout(typeWriter, 500);
     }
 
-});
+    /* =====================================================
+       5. 3D TILT EFFECT FOR VISUAL CODE CARD
+    ===================================================== */
+    const codeCard = document.querySelector('.code-card');
 
+    if (codeCard) {
+        codeCard.addEventListener('mousemove', (e) => {
+            const rect = codeCard.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
 
-/* ================= CURRENT YEAR ================= */
+            const rotateX = (-y / rect.height) * 20; // Maximum rotation angle
+            const rotateY = (x / rect.width) * 20;
 
-const currentYear =
-    new Date().getFullYear();
+            codeCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
 
-const footerYear =
-    document.querySelector(".footer p");
-
-
-if (footerYear) {
-
-    footerYear.textContent =
-        `© ${currentYear} Nova Studio. All rights reserved.`;
-
-}
-
-// Dynamic Typing Effect for Hero Code Card
-const codeElement = document.querySelector('.code-content code');
-if (codeElement) {
-    const originalText = codeElement.innerText;
-    codeElement.innerText = '';
-    let i = 0;
-    
-    function typeCode() {
-        if (i < originalText.length) {
-            codeElement.innerText += originalText.charAt(i);
-            i++;
-            setTimeout(typeCode, 30);
-        }
+        codeCard.addEventListener('mouseleave', () => {
+            codeCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
     }
-    setTimeout(typeCode, 500);
-}
 
+    /* =====================================================
+       6. REVEAL ELEMENTS ON SCROLL (INTERSECTION OBSERVER)
+    ===================================================== */
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Apply animation to cards and headings
+    const animatedItems = document.querySelectorAll('.service-card, .project-card, .section-heading');
+    animatedItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'all 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+        revealObserver.observe(item);
+    });
+});
